@@ -8,13 +8,16 @@ import (
 
 type Random struct {
 	*rand.Rand
-	label string
-	seed  interface{}
+	label  string
+	seed   interface{}
+	extend *Extend
 }
 
 func New(seedOrLabel ...interface{}) *Random {
 
-	r := &Random{}
+	r := &Random{extend: &Extend{}}
+	r.extend.rand = r
+
 	defer func() {
 		if r.label == "" {
 			log.Println("seed:", r.seed) // 默认打印seed
@@ -101,7 +104,8 @@ func New(seedOrLabel ...interface{}) *Random {
 }
 
 func NewNoLog(seedOrLabel ...interface{}) *Random {
-	r := &Random{}
+	r := &Random{extend: &Extend{}}
+	r.extend.rand = r
 
 	switch len(seedOrLabel) {
 	case 0:
@@ -204,4 +208,8 @@ func (rand *Random) OneOf64n(N uint64) bool {
 // OneOf64N N份之一触发概率
 func (rand *Random) OneOf32n(N uint32) bool {
 	return rand.Uint32()%N == 0
+}
+
+func (rand *Random) Extend() *Extend {
+	return rand.extend
 }
