@@ -8,15 +8,13 @@ import (
 
 type Random struct {
 	*rand.Rand
-	label  string
-	seed   interface{}
-	extend *Extend
+	label string
+	seed  interface{}
 }
 
 func New(seedOrLabel ...interface{}) *Random {
 
-	r := &Random{extend: &Extend{}}
-	r.extend.rand = r
+	r := &Random{}
 
 	defer func() {
 		if r.label == "" {
@@ -104,8 +102,7 @@ func New(seedOrLabel ...interface{}) *Random {
 }
 
 func NewNoLog(seedOrLabel ...interface{}) *Random {
-	r := &Random{extend: &Extend{}}
-	r.extend.rand = r
+	r := &Random{}
 
 	switch len(seedOrLabel) {
 	case 0:
@@ -211,5 +208,5 @@ func (rand *Random) OneOf32n(N uint32) bool {
 }
 
 func (rand *Random) Extend() *Extend {
-	return rand.extend
+	return (*Extend)(rand)
 }

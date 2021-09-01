@@ -10,6 +10,7 @@ require (
 require (
 	github.com/474420502/htmlquery v1.2.4-0.20200812072201-e871dd09247a // indirect
 	github.com/474420502/requests v1.11.0 // indirect
+	github.com/Pallinder/go-randomdata v1.2.0
 	github.com/antchfx/xpath v1.1.6 // indirect
 	github.com/golang/groupcache v0.0.0-20200121045136-8c9f03a8e57e // indirect
 	github.com/klauspost/compress v1.13.5

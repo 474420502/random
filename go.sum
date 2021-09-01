@@ -7,6 +7,8 @@ github.com/474420502/htmlquery v1.2.4-0.20200812072201-e871dd09247a/go.mod h1:Ao
 github.com/474420502/requests v1.10.1/go.mod h1:SB8/RIUVWF3AGotuq/mATUwAjXzzlV7iWaBNM3+c06c=
 github.com/474420502/requests v1.11.0 h1:YOU9Aq6gzJVQFnHxH3bXBl1zddMjxOGtA9oOxPv2/KA=
 github.com/474420502/requests v1.11.0/go.mod h1:SB8/RIUVWF3AGotuq/mATUwAjXzzlV7iWaBNM3+c06c=
+github.com/Pallinder/go-randomdata v1.2.0 h1:DZ41wBchNRb/0GfsePLiSwb0PHZmT67XY00lCDlaYPg=
+github.com/Pallinder/go-randomdata v1.2.0/go.mod h1:yHmJgulpD2Nfrm0cR9tI/+oAgRqCQQixsA8HyRZfV9Y=
 github.com/antchfx/xpath v1.1.6 h1:6sVh6hB5T6phw1pFpHRQ+C4bd8sNI+O58flqtg7h0R0=
 github.com/antchfx/xpath v1.1.6/go.mod h1:Yee4kTMuNiPYJ7nSNorELQMr1J33uOpXDMByNYhvtNk=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=

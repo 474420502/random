@@ -6,20 +6,42 @@ import (
 	"os"
 	"testing"
 
+	"github.com/474420502/gcurl"
 	"github.com/klauspost/compress/zstd"
+	"github.com/tidwall/gjson"
 )
 
 func TestGetData(t *testing.T) {
+	Use(DataCountryChina)
 	r := New(1630407844130142968)
-	Use(DataNameChinese)
 	for i := 0; i < 100; i++ {
-		log.Println(r.Extend().FullName())
+		log.Println(r.Extend().Country().LocalName)
 	}
 
 }
 
-func WriteCase1(t *testing.T) {
-	f, err := os.OpenFile("firstnames.gob.zst", os.O_CREATE|os.O_RDWR|os.O_TRUNC, 0664)
+var data []*Country
+
+func TestWriteCase1(t *testing.T) {
+
+	resp, err := gcurl.Parse("https://raw.githubusercontent.com/uiwjs/province-city-china/gh-pages/country.json").Temporary().Execute()
+	if err != nil {
+		panic(err)
+	}
+	for _, g := range gjson.Parse(string(resp.Content())).Array() {
+		country := &Country{}
+		country.ID = int(g.Get("id").Int())
+		country.LocalName = g.Get("cnname").String()
+		country.Name = g.Get("name").String()
+		country.FullName = g.Get("fullname").String()
+		country.Alpha2 = g.Get("alpha2").String()
+		country.Alpha3 = g.Get("alpha3").String()
+		country.Code = int(g.Get("numeric").Int())
+
+		data = append(data, country)
+	}
+
+	f, err := os.OpenFile("country.gob.zst", os.O_CREATE|os.O_RDWR|os.O_TRUNC, 0664)
 	if err != nil {
 		panic(err)
 	}
@@ -34,7 +56,7 @@ func WriteCase1(t *testing.T) {
 		panic(err)
 	}
 
-	err = genc.Encode(firstNameData)
+	err = genc.Encode(data)
 	if err != nil {
 		panic(err)
 	}
