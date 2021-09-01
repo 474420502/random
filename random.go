@@ -10,11 +10,12 @@ type Random struct {
 	*rand.Rand
 	label string
 	seed  interface{}
+	aplha []byte
 }
 
 func New(seedOrLabel ...interface{}) *Random {
 
-	r := &Random{}
+	r := &Random{aplha: alpha}
 
 	defer func() {
 		if r.label == "" {
@@ -102,7 +103,7 @@ func New(seedOrLabel ...interface{}) *Random {
 }
 
 func NewNoLog(seedOrLabel ...interface{}) *Random {
-	r := &Random{}
+	r := &Random{aplha: alpha}
 
 	switch len(seedOrLabel) {
 	case 0:

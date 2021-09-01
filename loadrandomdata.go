@@ -10,6 +10,7 @@ const (
 	DataAreaChina
 	DataTownChina
 	DataCountryChina
+	DataEmailChina
 )
 
 var registers map[RandomDataType]func() = make(map[RandomDataType]func())
