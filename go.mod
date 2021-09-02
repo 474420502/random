@@ -6,6 +6,7 @@ require github.com/474420502/gcurl v0.5.0
 
 require (
 	github.com/474420502/requests v1.11.0
+	github.com/474420502/structure v0.4.0
 	github.com/klauspost/compress v1.13.5
 	github.com/tidwall/gjson v1.8.1
 	github.com/tidwall/match v1.0.3 // indirect

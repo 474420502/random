@@ -27,18 +27,9 @@ func init() {
 func (ext *Extend) getChars() []byte {
 	size := rand.Intn(16) + 4
 	var result []byte = make([]byte, 0, 32)
-	v := ext.Uint64() // 6bit
-
 	for i := 0; i < size; i++ {
-		rsel := v & mask
-		if rsel > 35 {
-			rsel -= 36
-		}
+		rsel := ext.Intn(36)
 		result = append(result, alpha[rsel])
-		v = v >> 6
-		if i == 9 {
-			v = ext.Uint64()
-		}
 	}
 	return result
 }

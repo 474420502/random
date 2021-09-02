@@ -3,6 +3,8 @@ github.com/474420502/gcurl v0.5.0/go.mod h1:YCtPQEjzF0FaxBd8NPRBvpw/vYlF1t/sOtiD
 github.com/474420502/requests v1.10.1/go.mod h1:SB8/RIUVWF3AGotuq/mATUwAjXzzlV7iWaBNM3+c06c=
 github.com/474420502/requests v1.11.0 h1:YOU9Aq6gzJVQFnHxH3bXBl1zddMjxOGtA9oOxPv2/KA=
 github.com/474420502/requests v1.11.0/go.mod h1:SB8/RIUVWF3AGotuq/mATUwAjXzzlV7iWaBNM3+c06c=
+github.com/474420502/structure v0.4.0 h1:K5E2kxkYcHutq/NyNdI/ZKs+Z9dJKMdmK4FhGnASBgo=
+github.com/474420502/structure v0.4.0/go.mod h1:HKEMq5GlwxZKAQl3LwbN+A+E+wL9NimrNVlu7FIku3Y=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/elazarl/goproxy v0.0.0-20190711103511-473e67f1d7d2 h1:aZtFdDNWY/yH86JPR2WX/PN63635VsE/f/nXNPAbYxY=

@@ -24,6 +24,11 @@ func CheckAndDecompress(githuburl string, obj interface{}) {
 		if err != nil {
 			panic(err)
 		}
+
+		if len(resp.Content()) <= 100 {
+			panic("找不到该数据")
+		}
+
 		_, err = f.Write(resp.Content())
 		if err != nil {
 			panic(err)
@@ -46,4 +51,29 @@ func CheckAndDecompress(githuburl string, obj interface{}) {
 	if err != nil {
 		panic(err)
 	}
+}
+
+func CompressData(filepath string, data interface{}) {
+	f, err := os.OpenFile(filepath, os.O_CREATE|os.O_RDWR|os.O_TRUNC, 0664)
+	if err != nil {
+		panic(err)
+	}
+
+	enc, err := zstd.NewWriter(f)
+	if err != nil {
+		panic(err)
+	}
+
+	genc := gob.NewEncoder(enc)
+	if err != nil {
+		panic(err)
+	}
+
+	err = genc.Encode(data)
+	if err != nil {
+		panic(err)
+	}
+
+	enc.Close()
+	f.Close()
 }
