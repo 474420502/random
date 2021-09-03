@@ -14,6 +14,14 @@ import (
 	"github.com/tidwall/gjson"
 )
 
+func TestIP(t *testing.T) {
+	r := New()
+	// Use(DataCityChina)
+	for i := 0; i < 1000; i++ {
+		log.Println(r.Extend().IPv6().String())
+	}
+}
+
 func TestGetData(t *testing.T) {
 	r := New()
 	Use(DataCityChina)
