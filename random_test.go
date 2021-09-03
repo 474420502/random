@@ -16,12 +16,9 @@ import (
 
 func TestGetData(t *testing.T) {
 	r := New()
-
-	Use(DataEmailChina)
-
+	Use(DataCityChina)
 	for i := 0; i < 1000; i++ {
-
-		log.Println(r.Extend().Email())
+		log.Println(r.Extend().City())
 	}
 
 }
@@ -121,28 +118,20 @@ func estOpenTxt(t *testing.T) {
 
 }
 
-var data []*Country
+var data []string
 
-func estWriteCase1(t *testing.T) {
+func TestWriteCase1(t *testing.T) {
 
-	resp, err := gcurl.Parse("https://raw.githubusercontent.com/uiwjs/province-city-china/gh-pages/country.json").Temporary().Execute()
+	resp, err := gcurl.Parse("https://raw.githubusercontent.com/uiwjs/province-city-china/gh-pages/city.json").Temporary().Execute()
 	if err != nil {
 		panic(err)
 	}
 	for _, g := range gjson.Parse(string(resp.Content())).Array() {
-		country := &Country{}
-		country.ID = int(g.Get("id").Int())
-		country.LocalName = g.Get("cnname").String()
-		country.Name = g.Get("name").String()
-		country.FullName = g.Get("fullname").String()
-		country.Alpha2 = g.Get("alpha2").String()
-		country.Alpha3 = g.Get("alpha3").String()
-		country.Code = int(g.Get("numeric").Int())
 
-		data = append(data, country)
+		data = append(data, g.Get("name").String())
 	}
 
-	f, err := os.OpenFile("country.gob.zst", os.O_CREATE|os.O_RDWR|os.O_TRUNC, 0664)
+	f, err := os.OpenFile("city.gob.zst", os.O_CREATE|os.O_RDWR|os.O_TRUNC, 0664)
 	if err != nil {
 		panic(err)
 	}

@@ -5,10 +5,6 @@ import (
 	"sort"
 )
 
-const (
-	emailDataUrl_CN = "https://raw.githubusercontent.com/474420502/random_data/master/emailsuffix.gob.zst"
-)
-
 var alpha = []byte("0123456789abcdefghijklmnopqrstuvwxyz")
 
 const mask = uint64(0b111111)
@@ -17,7 +13,7 @@ var suffixwords [][]byte
 
 func init() {
 	registers[DataEmailChina] = func() {
-		CheckAndDecompress(emailDataUrl_CN, &suffixwords)
+		CheckAndDecompress(dconf.dataUrls["emailsuffix"], &suffixwords)
 		sort.Slice(suffixwords, func(i, j int) bool {
 			return len(suffixwords[i]) < len(suffixwords[j])
 		})

@@ -1,5 +1,7 @@
 package random
 
+import "sync"
+
 type RandomDataType int
 
 const (
@@ -12,8 +14,8 @@ const (
 	DataCityChina
 	// DataTownChina 县城
 	DataAreaChina
-	// DataTownChina 街道(乡) 数据
-	DataTownChina
+	// DataTownStreetChina 街道(乡) 数据 Town() Street() 一样的数据
+	DataTownStreetChina
 	// DataCountryChina 全球国家 数据
 	DataCountryChina
 	// DataEmailChina email 数据
@@ -23,7 +25,10 @@ const (
 )
 
 var registers map[RandomDataType]func() = make(map[RandomDataType]func())
+var registersLock sync.Mutex
 
 func Use(t RandomDataType) {
+	registersLock.Lock()
+	defer registersLock.Unlock()
 	registers[t]()
 }

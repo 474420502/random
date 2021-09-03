@@ -2,15 +2,12 @@ package random
 
 import "sort"
 
-const (
-	provinceDataUrl_CN = "https://raw.githubusercontent.com/474420502/random_data/master/province.gob.zst"
-)
-
 var provinceData []string
 
 func init() {
 	registers[DataProvinceChina] = func() {
-		CheckAndDecompress(provinceDataUrl_CN, &provinceData)
+
+		CheckAndDecompress(dconf.dataUrls["province"], &provinceData)
 		sort.Strings(provinceData)
 	}
 }

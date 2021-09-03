@@ -12,15 +12,12 @@ type Country struct {
 	Code      int    `json:"code"`
 }
 
-const (
-	countryDataUrl_CN = "https://raw.githubusercontent.com/474420502/random_data/master/country.gob.zst"
-)
-
 var countryData []*Country
 
 func init() {
 	registers[DataCountryChina] = func() {
-		CheckAndDecompress(countryDataUrl_CN, &countryData)
+
+		CheckAndDecompress(dconf.dataUrls["country"], &countryData)
 		sort.Slice(countryData, func(i, j int) bool {
 			return countryData[i].ID < countryData[j].ID
 		})

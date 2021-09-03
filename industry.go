@@ -1,9 +1,5 @@
 package random
 
-const (
-	industryDataUrl_CN = "https://raw.githubusercontent.com/474420502/random_data/master/industry.gob.zst"
-)
-
 // Industry 行业类别
 type Industry struct {
 	Level1 IndustryElement // 门类
@@ -32,8 +28,9 @@ var industryTree *industryRoot
 
 func init() {
 	var inds []*industryClassNode
+
 	registers[DataIndustryChina] = func() {
-		CheckAndDecompress(industryDataUrl_CN, &inds)
+		CheckAndDecompress(dconf.dataUrls["industry"], &inds)
 		industryTree = createFrom(inds)
 	}
 }

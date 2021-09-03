@@ -1,13 +1,17 @@
 package random
 
 import (
+	"bufio"
 	"encoding/gob"
+	"log"
 	"os"
 	"strings"
 
 	"github.com/474420502/requests"
 	"github.com/klauspost/compress/zstd"
 )
+
+var sourceUrlPrefix = "https://raw.githubusercontent.com/474420502/random_data/master/"
 
 func CheckAndDecompress(githuburl string, obj interface{}) {
 
@@ -16,10 +20,14 @@ func CheckAndDecompress(githuburl string, obj interface{}) {
 
 	f, err := os.Open(filename)
 	if err != nil {
+
 		resp, err := requests.NewSession().Get(githuburl).Execute()
 		if err != nil {
 			panic(err)
 		}
+
+		log.Println(len(resp.Content()))
+
 		f, err = os.OpenFile(filename, os.O_CREATE|os.O_WRONLY, 0664)
 		if err != nil {
 			panic(err)
@@ -29,12 +37,21 @@ func CheckAndDecompress(githuburl string, obj interface{}) {
 			panic("找不到该数据")
 		}
 
-		_, err = f.Write(resp.Content())
+		w := bufio.NewWriter(f)
+
+		_, err = w.Write(resp.Content())
 		if err != nil {
 			panic(err)
 		}
 
-		f.Close()
+		err = w.Flush()
+		if err != nil {
+			panic(err)
+		}
+
+		if err := f.Close(); err != nil {
+			panic(err)
+		}
 
 		f, err = os.Open(filename)
 		if err != nil {
