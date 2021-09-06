@@ -30,6 +30,6 @@ func (ext *Extend) DateRange(start, end interface{}) time.Time {
 		return time.UnixMicro(s + ext.Int63n(e-s))
 	default:
 		log.Panicln("数据类型错误", start, end)
+		return time.Now()
 	}
-
 }
