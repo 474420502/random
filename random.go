@@ -193,7 +193,7 @@ func (rand *Random) Bool() bool {
 	return rand.Intn(2) == 1
 }
 
-// Probability 返回成功概率. eg percent = 0.34 -> 34%
+// Probability percent概率返回true. eg percent = 0.34 -> 34%
 func (rand *Random) Probability(percent float64) bool {
 	return rand.Float64() < percent
 }

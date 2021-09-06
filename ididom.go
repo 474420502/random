@@ -13,6 +13,6 @@ func init() {
 	}
 }
 
-func (ext *Extend) IDidom() *Ididom {
+func (ext *Extend) Ididom() *Ididom {
 	return ididoms[ext.Intn(len(ididoms))]
 }
