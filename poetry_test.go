@@ -16,7 +16,7 @@ type cPoetry struct {
 	Content []string `exp:"./div[@class='cont']//div[@class='sj']/text()"`
 }
 
-func TestPoetry(t *testing.T) {
+func estPoetry(t *testing.T) {
 	r := New()
 	Use(DataPoetryChina)
 	for i := 0; i < 1000; i++ {

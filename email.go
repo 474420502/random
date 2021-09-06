@@ -7,8 +7,6 @@ import (
 
 var alpha = []byte("0123456789abcdefghijklmnopqrstuvwxyz")
 
-const mask = uint64(0b111111)
-
 var suffixwords [][]byte
 
 func init() {
