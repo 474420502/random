@@ -22,6 +22,10 @@ const (
 	DataEmailChina
 	// DataIndustryChina 中国行业 数据
 	DataIndustryChina
+	// DataIdidomChina 中国成语
+	DataIdidomChina
+	// DataIdidomChina 中国诗文
+	DataPoetryChina
 )
 
 var registers map[RandomDataType]func() = make(map[RandomDataType]func())

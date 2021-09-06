@@ -128,7 +128,7 @@ func estOpenTxt(t *testing.T) {
 
 var data []string
 
-func TestWriteCase1(t *testing.T) {
+func estWriteCase1(t *testing.T) {
 
 	resp, err := gcurl.Parse("https://raw.githubusercontent.com/uiwjs/province-city-china/gh-pages/city.json").Temporary().Execute()
 	if err != nil {
@@ -163,7 +163,7 @@ func TestWriteCase1(t *testing.T) {
 	f.Close()
 }
 
-func TestCase2(t *testing.T) {
+func estCase2(t *testing.T) {
 	// zstd.NewWriter()
 	f, err := os.Open("firstnames.gob")
 	if err != nil {
