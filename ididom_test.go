@@ -9,6 +9,7 @@ import (
 )
 
 func TestIdidom(t *testing.T) {
+
 	r := New()
 	Use(DataIdidomChina)
 	for i := 0; i < 1000; i++ {
