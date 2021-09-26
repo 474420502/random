@@ -3,6 +3,7 @@ package random
 import (
 	"bufio"
 	"encoding/gob"
+	"fmt"
 	"log"
 	"os"
 	"strings"
@@ -11,12 +12,26 @@ import (
 	"github.com/klauspost/compress/zstd"
 )
 
+var defaultDir = ".random_base_data"
 var sourceUrlPrefix = "https://raw.githubusercontent.com/474420502/random_data/master/"
 
 func CheckAndDecompress(githuburl string, obj interface{}) {
 
+	if info, err := os.Stat(defaultDir); err != nil {
+		if os.IsNotExist(err) {
+			err = os.MkdirAll(defaultDir, os.ModePerm)
+			if err != nil {
+				panic(err)
+			}
+		}
+	} else {
+		if !info.IsDir() {
+			panic(fmt.Errorf("%s file exists and is not dir", defaultDir))
+		}
+	}
+
 	idx := strings.LastIndex(githuburl, "/")
-	filename := githuburl[idx+1:]
+	filename := defaultDir + "/" + githuburl[idx+1:]
 
 	f, err := os.Open(filename)
 	if err != nil {

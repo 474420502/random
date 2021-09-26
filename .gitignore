@@ -33,3 +33,4 @@ screenlog.*
 *.zstd
 *.gob
 *.txt
+.random_base_data

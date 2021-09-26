@@ -36,3 +36,9 @@ func Use(t RandomDataType) {
 	defer registersLock.Unlock()
 	registers[t]()
 }
+
+func SetDefaultDataDir(dir string) {
+	registersLock.Lock()
+	defer registersLock.Unlock()
+	defaultDir = dir
+}

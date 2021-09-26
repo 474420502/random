@@ -1,6 +1,8 @@
 package random
 
-import "sort"
+import (
+	"sort"
+)
 
 var firstNameData []string
 var lastNameData []string
@@ -24,7 +26,11 @@ func (ext *Extend) FirstName() string {
 }
 
 func (ext *Extend) LastName() string {
-	return lastNameData[ext.Intn(len(lastNameData))]
+	ln := lastNameData[ext.Intn(len(lastNameData))]
+	if ext.Int63n(10) == 0 {
+		return string([]rune(ln)[:1])
+	}
+	return ln
 }
 
 func (ext *Extend) FullName() string {
