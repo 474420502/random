@@ -11,13 +11,25 @@
 ```
 
 * 例子
-```
-    r := random.New() // 可以定义种子. 方便测试查找问题
+``` golang
+package main
 
-	Use(DataNameChina) // 需要提前加载, 从github上下载数据, 默认生成文件夹 .random_base_data 里
-	Use(DataIndustryChina)
-	Use(DataCityChina)
-	Use(DataPoetryChina)
+import (
+	"log"
+
+	"github.com/474420502/random"
+)
+
+func main() {
+	r := random.New() // 可以定义种子. 方便测试查找问题. 默认继承go rand包. 加了几个函数.
+
+    log.Println(r.Probability(0.4)) // 40%的概率返回true
+	log.Println(r.OneOf64n(4))      // 4份一概率返回true
+
+	random.Use(random.DataNameChina) // 需要提前加载, 从github上下载数据, 默认生成文件夹 .random_base_data 里
+	random.Use(random.DataIndustryChina)
+	random.Use(random.DataCityChina)
+	random.Use(random.DataPoetryChina)
 
 	log.Println(r.Extend().FirstName()) // 宇文
 	log.Println(r.Extend().LastName())  // 毅皿
@@ -46,6 +58,8 @@
 	// 微雨从东来，好风与之俱。
 	// 泛览《周王传》，流观《山海》图。
 	// 俯仰终宇宙，不乐复何如
+}
+
 ```
 * 所有需要下载的内容
 ```

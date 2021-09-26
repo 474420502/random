@@ -8,6 +8,9 @@ import (
 func TestName(t *testing.T) {
 	r := New()
 
+	log.Println(r.Probability(0.4)) // 40%的概率返回true
+	log.Println(r.OneOf64n(4))      // 4份一概率返回true
+
 	Use(DataNameChina)
 	Use(DataIndustryChina)
 	Use(DataCityChina)
