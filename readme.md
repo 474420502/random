@@ -6,11 +6,13 @@
 
 
 * 添加依赖包, 不包含数据
-```
-    go get https://github.com/474420502/random
+
+``` bash
+go get  github.com/474420502/random
 ```
 
 * 例子
+
 ``` golang
 package main
 
@@ -61,7 +63,9 @@ func main() {
 }
 
 ```
+
 * 所有需要下载的内容
+
 ```
 	// DataNameChina 姓名数据
 	DataNameChina
