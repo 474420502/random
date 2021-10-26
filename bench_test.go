@@ -1,6 +1,7 @@
 package random
 
 import (
+	"log"
 	"testing"
 )
 
@@ -85,5 +86,15 @@ func BenchmarkCountry(b *testing.B) {
 	b.StartTimer()
 	for i := 0; i < b.N; i++ {
 		r.Extend().Country()
+	}
+}
+
+func BenchmarkBytes(b *testing.B) {
+	b.StopTimer()
+	r := New()
+
+	b.StartTimer()
+	for i := 0; i < b.N; i++ {
+		log.Println(r.Bytes(0, 100))
 	}
 }

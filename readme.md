@@ -25,13 +25,15 @@ import (
 func main() {
 	r := random.New() // 可以定义种子. 方便测试查找问题. 默认继承go rand包. 加了几个函数.
 
-    log.Println(r.Probability(0.4)) // 40%的概率返回true
+ 	log.Println(r.Probability(0.4)) // 40%的概率返回true
 	log.Println(r.OneOf64n(4))      // 4份一概率返回true
 
-	random.Use(random.DataNameChina) // 需要提前加载, 从github上下载数据, 默认生成文件夹 .random_base_data 里
-	random.Use(random.DataIndustryChina)
-	random.Use(random.DataCityChina)
-	random.Use(random.DataPoetryChina)
+	Use(DataNameChina)
+	Use(DataIndustryChina)
+	Use(DataCityChina)
+	Use(DataPoetryChina)
+	Use(DataEmailChina)
+	Use(DataCountryChina)
 
 	log.Println(r.Extend().FirstName()) // 宇文
 	log.Println(r.Extend().LastName())  // 毅皿
@@ -45,6 +47,26 @@ func main() {
 
 	city := r.Extend().City()
 	log.Println(city) // 泰州市
+
+	phone := r.Extend().Phone()
+	log.Println(phone.Operators, phone.Number) // 中国电信 18030082158
+
+	date1 := r.Extend().Date()
+	date2 := r.Extend().DateRange("2021-10-21", "2021-10-25")
+	log.Println(date1, date2)
+	// 1993-11-22 16:55:37.264646 +0800 CST
+	// 2021-10-22 19:16:17.424177 +0800 CST
+
+	// 随机文字
+	log.Println(r.Extend().TextN(10)) // 漡詟覷髋簑㖦䈉们䩈㥄
+	// email
+	log.Println(r.Extend().Email()) // vkwlfjbdd7@foot.com
+	// 国家
+	country := r.Extend().Country()
+	log.Println(country.Code, country.Alpha2, country.Alpha3, country.FullName, country.LocalName) // vkwlfjbdd7@foot.com
+	// 116 KH KHM the Kingdom of Cambodia 柬埔寨
+
+	log.Println(r.Bytes(10, 100)) // 随机字节
 
 	poetry := r.Extend().Poetry()
 	log.Println(poetry.Title, poetry.Writer, poetry.Dynasty, poetry.Content)

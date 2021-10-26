@@ -1,6 +1,7 @@
 package random
 
 import (
+	"encoding/binary"
 	"log"
 	"math/rand"
 	"time"
@@ -203,9 +204,19 @@ func (rand *Random) OneOf64n(N uint64) bool {
 	return rand.Uint64()%N == 0
 }
 
-// OneOf64N N份之一触发概率
+// OneOf32N N份之一触发概率
 func (rand *Random) OneOf32n(N uint32) bool {
 	return rand.Uint32()%N == 0
+}
+
+// Bytes 随机字节数据 [min,max)
+func (rand *Random) Bytes(min, max int64) []byte {
+	size := rand.Int63n(max-min) + min
+	var buf []byte = make([]byte, size+9)
+	for i := int64(0); i < size; i += 8 {
+		binary.PutUvarint(buf[i:], rand.Uint64())
+	}
+	return buf[0:size]
 }
 
 func (rand *Random) Extend() *Extend {

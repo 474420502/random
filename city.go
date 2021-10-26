@@ -11,6 +11,7 @@ func init() {
 	}
 }
 
+// City 随机城市
 func (ext *Extend) City() string {
 	return cityData[ext.Intn(len(cityData))]
 }

@@ -15,6 +15,8 @@ func TestName(t *testing.T) {
 	Use(DataIndustryChina)
 	Use(DataCityChina)
 	Use(DataPoetryChina)
+	Use(DataEmailChina)
+	Use(DataCountryChina)
 
 	log.Println(r.Extend().FirstName()) // 宇文
 	log.Println(r.Extend().LastName())  // 毅皿
@@ -28,6 +30,26 @@ func TestName(t *testing.T) {
 
 	city := r.Extend().City()
 	log.Println(city) // 泰州市
+
+	phone := r.Extend().Phone()
+	log.Println(phone.Operators, phone.Number) // 中国电信 18030082158
+
+	date1 := r.Extend().Date()
+	date2 := r.Extend().DateRange("2021-10-21", "2021-10-25")
+	log.Println(date1, date2)
+	// 1993-11-22 16:55:37.264646 +0800 CST
+	// 2021-10-22 19:16:17.424177 +0800 CST
+
+	// 随机文字
+	log.Println(r.Extend().TextN(10)) // 漡詟覷髋簑㖦䈉们䩈㥄
+	// email
+	log.Println(r.Extend().Email()) // vkwlfjbdd7@foot.com
+	// 国家
+	country := r.Extend().Country()
+	log.Println(country.Code, country.Alpha2, country.Alpha3, country.FullName, country.LocalName) // vkwlfjbdd7@foot.com
+	// 116 KH KHM the Kingdom of Cambodia 柬埔寨
+
+	log.Println(r.Bytes(10, 100)) // 随机字节
 
 	poetry := r.Extend().Poetry()
 	log.Println(poetry.Title, poetry.Writer, poetry.Dynasty, poetry.Content)

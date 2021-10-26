@@ -12,6 +12,7 @@ func init() {
 	}
 }
 
+// Province 随机省份
 func (ext *Extend) Province() string {
 	return provinceData[ext.Intn(len(provinceData))]
 }

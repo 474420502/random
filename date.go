@@ -5,10 +5,12 @@ import (
 	"time"
 )
 
+// Date 随机时间. 不超过当前时间
 func (ext *Extend) Date() time.Time {
 	return time.UnixMicro(ext.Int63n(time.Now().UnixMicro()))
 }
 
+// DateRange 随机时间. 输入参数确认时间. 参数可以是 时间戳 字符'2021-10-21' time.Time等
 func (ext *Extend) DateRange(start, end interface{}) time.Time {
 
 	switch start.(type) {

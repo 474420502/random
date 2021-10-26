@@ -5,6 +5,7 @@ import (
 	"net"
 )
 
+// IPv4 随机ipv4
 func (ext *Extend) IPv4() net.IP {
 	var ipbytes net.IP = make([]byte, 4)
 	binary.LittleEndian.PutUint32(ipbytes, ext.Uint32())
@@ -12,6 +13,7 @@ func (ext *Extend) IPv4() net.IP {
 	// return fmt.Sprintf("%d.%d.%d.%d", bs[0], bs[1], bs[2], bs[3])
 }
 
+// IPv6 随机ipv6
 func (ext *Extend) IPv6() net.IP {
 	var ipbytes net.IP = make([]byte, 16)
 	binary.LittleEndian.PutUint64(ipbytes, ext.Uint64())

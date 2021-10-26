@@ -1,8 +1,8 @@
 package random
 
 type Phone struct {
-	Operators string
-	Number    int
+	Operators string // 归属运营商
+	Number    int    // 号码
 }
 
 type operators struct {
@@ -14,6 +14,7 @@ var dianxin *operators = &operators{"中国电信", []int{133, 149, 153, 173, 17
 var liantong *operators = &operators{"中国联通", []int{130, 131, 132, 145, 155, 156, 166, 171, 175, 176, 185, 186}}
 var yidong *operators = &operators{"中国移动", []int{134, 135, 136, 137, 138, 139, 147, 150, 151, 152, 157, 158, 159, 172, 178, 182, 183, 184, 187, 188, 198}}
 
+// Phone 随机手机号码
 func (ext *Extend) Phone() *Phone {
 	var op *operators
 	switch ext.Intn(3) {

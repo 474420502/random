@@ -15,6 +15,7 @@ func init() {
 	}
 }
 
+// Poetry 随机诗词
 func (ext *Extend) Poetry() *Poetry {
 	return poetrys[ext.Intn(len(poetrys))]
 }

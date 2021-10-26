@@ -28,6 +28,7 @@ func (ext *Extend) getChars() []byte {
 	return result
 }
 
+// Email 随机email
 func (ext *Extend) Email() string {
 	buf := ext.getChars()
 	buf = append(buf, suffixwords[ext.Intn(len(suffixwords))]...)

@@ -21,10 +21,12 @@ func init() {
 	}
 }
 
+// FirstName 姓
 func (ext *Extend) FirstName() string {
 	return firstNameData[ext.Intn(len(firstNameData))]
 }
 
+// LastName 名
 func (ext *Extend) LastName() string {
 	ln := lastNameData[ext.Intn(len(lastNameData))]
 	if ext.Int63n(10) == 0 {
@@ -33,6 +35,7 @@ func (ext *Extend) LastName() string {
 	return ln
 }
 
+// FullName 全名
 func (ext *Extend) FullName() string {
 	return ext.FirstName() + ext.LastName()
 }

@@ -11,6 +11,7 @@ func init() {
 	}
 }
 
+// Area 随机区域
 func (ext *Extend) Area() string {
 	return areaData[ext.Intn(len(areaData))]
 }

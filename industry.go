@@ -82,6 +82,7 @@ func (inds *industryRoot) get(selects ...int) *industryClassNode {
 	return sel
 }
 
+// Industry 随机行业数据
 func (ext *Extend) Industry() *Industry {
 
 	var ind *Industry = &Industry{}
