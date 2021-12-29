@@ -28,12 +28,12 @@ func main() {
  	log.Println(r.Probability(0.4)) // 40%的概率返回true
 	log.Println(r.OneOf64n(4))      // 4份一概率返回true
 
-	Use(DataNameChina)
-	Use(DataIndustryChina)
-	Use(DataCityChina)
-	Use(DataPoetryChina)
-	Use(DataEmailChina)
-	Use(DataCountryChina)
+	random.Use(DataNameChina)
+	random.Use(DataIndustryChina)
+	random.Use(DataCityChina)
+	random.Use(DataPoetryChina)
+	random.Use(DataEmailChina)
+	random.Use(DataCountryChina)
 
 	log.Println(r.Extend().FirstName()) // 宇文
 	log.Println(r.Extend().LastName())  // 毅皿
