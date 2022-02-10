@@ -14,6 +14,44 @@ type Random struct {
 	aplha []byte
 }
 
+type BaseType int
+
+const (
+	BaseTypeFloat32 BaseType = iota
+	BaseTypeFloat64
+	BaseTypeInt
+	BaseTypeInt8
+	BaseTypeInt16
+	BaseTypeInt32
+	BaseTypeInt64
+	BaseTypeUint
+	BaseTypeUint8
+	BaseTypeUint16
+	BaseTypeUint32
+	BaseTypeUint64
+	BaseTypeBytes
+	BaseTypeString
+
+	BASETYPEEND // 没有意义 作为结尾
+)
+
+type BaseTypeOption struct {
+	Float32 *[2]float32
+	Float64 *[2]float64
+	Int     *[2]int
+	Int8    *[2]int8
+	Int16   *[2]int16
+	Int32   *[2]int32
+	Int64   *[2]int64
+	Uint    *[2]uint
+	Uint8   *[2]uint8
+	Uint16  *[2]uint16
+	Uint32  *[2]uint32
+	Uint64  *[2]uint64
+	Bytes   *[2]int64
+	String  *[2]int64
+}
+
 func New(seedOrLabel ...interface{}) *Random {
 
 	r := &Random{aplha: alpha}
@@ -217,6 +255,32 @@ func (rand *Random) Bytes(min, max int64) []byte {
 		binary.PutUvarint(buf[i:], rand.Uint64())
 	}
 	return buf[0:size]
+}
+
+// BaseTypeValue 随机基础类型. 如 intX uintX floatX byte string
+func (rand *Random) BaseType(option BaseTypeOption) interface{} {
+	tv := rand.Intn(int(BASETYPEEND))
+	switch BaseType(tv) {
+	case BaseTypeFloat32:
+		v := rand.Float32()
+		if option.Float32 != nil {
+
+		}
+	case BaseTypeFloat64:
+	case BaseTypeInt:
+	case BaseTypeInt8:
+	case BaseTypeInt16:
+	case BaseTypeInt32:
+	case BaseTypeInt64:
+	case BaseTypeUint:
+	case BaseTypeUint8:
+	case BaseTypeUint16:
+	case BaseTypeUint32:
+	case BaseTypeUint64:
+	case BaseTypeBytes:
+	case BaseTypeString:
+	}
+	return nil
 }
 
 func (rand *Random) Extend() *Extend {
