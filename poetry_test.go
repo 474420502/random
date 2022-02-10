@@ -2,11 +2,7 @@ package random
 
 import (
 	"log"
-	"strings"
 	"testing"
-
-	"github.com/474420502/extractor"
-	"github.com/474420502/requests"
 )
 
 type cPoetry struct {
@@ -28,51 +24,51 @@ func estPoetry(t *testing.T) {
 	}
 }
 
-func estGetUrlPoetry(t *testing.T) {
-	u := "https://www.y5000.com/poetry/list-0-0-1.html"
-	tp := requests.NewSession().Get(u)
-	p := tp.PathParam("list-(\\d+)-0-(\\d+)\\.")
-	var ps []*cPoetry
-	for c := int64(1); c < 13; c++ {
-		for i := int64(1); ; i++ {
-			p.IntArraySet(0, c)
-			p.IntArraySet(1, i)
+// func estGetUrlPoetry(t *testing.T) {
+// 	u := "https://www.y5000.com/poetry/list-0-0-1.html"
+// 	tp := requests.NewSession().Get(u)
+// 	p := tp.PathParam("list-(\\d+)-0-(\\d+)\\.")
+// 	var ps []*cPoetry
+// 	for c := int64(1); c < 13; c++ {
+// 		for i := int64(1); ; i++ {
+// 			p.IntArraySet(0, c)
+// 			p.IntArraySet(1, i)
 
-			resp, err := tp.Execute()
-			if err != nil {
-				panic(err)
-			}
-			etor := extractor.ExtractHtml(resp.Content())
-			xps, err := etor.XPaths("//ul[@class='pL-ul']")
-			if err != nil {
-				panic(err)
-			}
-			lis, errs := xps.ForEach("//li")
-			if len(errs) != 0 {
-				panic(errs)
-			}
-			if lis == nil {
-				log.Println("page:", i)
-				break
+// 			resp, err := tp.Execute()
+// 			if err != nil {
+// 				panic(err)
+// 			}
+// 			etor := extractor.ExtractHtml(resp.Content())
+// 			xps, err := etor.XPaths("//ul[@class='pL-ul']")
+// 			if err != nil {
+// 				panic(err)
+// 			}
+// 			lis, errs := xps.ForEach("//li")
+// 			if len(errs) != 0 {
+// 				panic(errs)
+// 			}
+// 			if lis == nil {
+// 				log.Println("page:", i)
+// 				break
 
-			}
+// 			}
 
-			for _, poetry := range lis.ForEachObjectByTag(cPoetry{}) {
-				i := poetry.(*cPoetry)
-				i.Dynasty = strings.Trim(i.Dynasty, "【】 ")
-				ps = append(ps, i)
-			}
-		}
-	}
+// 			for _, poetry := range lis.ForEachObjectByTag(cPoetry{}) {
+// 				i := poetry.(*cPoetry)
+// 				i.Dynasty = strings.Trim(i.Dynasty, "【】 ")
+// 				ps = append(ps, i)
+// 			}
+// 		}
+// 	}
 
-	for _, cp := range ps {
-		p := &Poetry{}
-		p.Title = cp.Title
-		p.Dynasty = cp.Dynasty
-		p.Writer = cp.Writer
-		p.Content = strings.Join(cp.Content, "\n")
-		poetrys = append(poetrys, p)
-	}
+// 	for _, cp := range ps {
+// 		p := &Poetry{}
+// 		p.Title = cp.Title
+// 		p.Dynasty = cp.Dynasty
+// 		p.Writer = cp.Writer
+// 		p.Content = strings.Join(cp.Content, "\n")
+// 		poetrys = append(poetrys, p)
+// 	}
 
-	CompressData("poetry.gob.zst", poetrys)
-}
+// 	CompressData("poetry.gob.zst", poetrys)
+// }

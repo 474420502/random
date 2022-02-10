@@ -4,11 +4,12 @@ import (
 	"bufio"
 	"encoding/gob"
 	"fmt"
+	"io/ioutil"
 	"log"
+	"net/http"
 	"os"
 	"strings"
 
-	"github.com/474420502/requests"
 	"github.com/klauspost/compress/zstd"
 )
 
@@ -36,25 +37,36 @@ func CheckAndDecompress(githuburl string, obj interface{}) {
 	f, err := os.Open(filename)
 	if err != nil {
 
-		resp, err := requests.NewSession().Get(githuburl).Execute()
+		// resp, err := requests.NewSession().Get(githuburl).Execute()
+		// if err != nil {
+		// 	panic(err)
+		// }
+
+		req, err := http.NewRequest("GET", githuburl, nil)
 		if err != nil {
 			panic(err)
 		}
-
-		log.Println(len(resp.Content()))
+		resp, err := http.DefaultClient.Do(req)
+		if err != nil {
+			panic(err)
+		}
+		data, err := ioutil.ReadAll(resp.Body)
+		if err != nil {
+			panic(err)
+		}
+		log.Println(len(data))
 
 		f, err = os.OpenFile(filename, os.O_CREATE|os.O_WRONLY, 0664)
 		if err != nil {
 			panic(err)
 		}
 
-		if len(resp.Content()) <= 100 {
+		if len(data) <= 100 {
 			panic("找不到该数据")
 		}
 
 		w := bufio.NewWriter(f)
-
-		_, err = w.Write(resp.Content())
+		_, err = w.Write(data)
 		if err != nil {
 			panic(err)
 		}

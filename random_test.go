@@ -9,9 +9,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/474420502/gcurl"
 	"github.com/klauspost/compress/zstd"
-	"github.com/tidwall/gjson"
 )
 
 func TestIP(t *testing.T) {
@@ -128,40 +126,40 @@ func estOpenTxt(t *testing.T) {
 
 var data []string
 
-func estWriteCase1(t *testing.T) {
+// func estWriteCase1(t *testing.T) {
 
-	resp, err := gcurl.Parse("https://raw.githubusercontent.com/uiwjs/province-city-china/gh-pages/city.json").Temporary().Execute()
-	if err != nil {
-		panic(err)
-	}
-	for _, g := range gjson.Parse(string(resp.Content())).Array() {
+// 	resp, err := gcurl.Parse("https://raw.githubusercontent.com/uiwjs/province-city-china/gh-pages/city.json").Temporary().Execute()
+// 	if err != nil {
+// 		panic(err)
+// 	}
+// 	for _, g := range gjson.Parse(string(resp.Content())).Array() {
 
-		data = append(data, g.Get("name").String())
-	}
+// 		data = append(data, g.Get("name").String())
+// 	}
 
-	f, err := os.OpenFile("city.gob.zst", os.O_CREATE|os.O_RDWR|os.O_TRUNC, 0664)
-	if err != nil {
-		panic(err)
-	}
+// 	f, err := os.OpenFile("city.gob.zst", os.O_CREATE|os.O_RDWR|os.O_TRUNC, 0664)
+// 	if err != nil {
+// 		panic(err)
+// 	}
 
-	enc, err := zstd.NewWriter(f)
-	if err != nil {
-		panic(err)
-	}
+// 	enc, err := zstd.NewWriter(f)
+// 	if err != nil {
+// 		panic(err)
+// 	}
 
-	genc := gob.NewEncoder(enc)
-	if err != nil {
-		panic(err)
-	}
+// 	genc := gob.NewEncoder(enc)
+// 	if err != nil {
+// 		panic(err)
+// 	}
 
-	err = genc.Encode(data)
-	if err != nil {
-		panic(err)
-	}
+// 	err = genc.Encode(data)
+// 	if err != nil {
+// 		panic(err)
+// 	}
 
-	enc.Close()
-	f.Close()
-}
+// 	enc.Close()
+// 	f.Close()
+// }
 
 func estCase2(t *testing.T) {
 	// zstd.NewWriter()
