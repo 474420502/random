@@ -19,9 +19,9 @@ func (ext *Extend) TextN(n int) string {
 }
 
 // TextN 文字随机. N个文字 [sNum, eNum)
-func (ext *Extend) TextRangeN(sNum, eNum int) string {
+func (ext *Extend) TextRangeN(min, max int) string {
 	var result []rune
-	n := sNum + ext.Intn(eNum+1-sNum)
+	n := min + ext.Intn(max+1-min)
 	for i := 0; i < n; i++ {
 		v := rand.Intn(textmax)
 		result = append(result, rune(texts+v))

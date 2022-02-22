@@ -10,8 +10,10 @@ func init() {
 }
 
 func BenchmarkEmail(b *testing.B) {
+	b.StopTimer()
 	r := New()
 	Use(DataEmailChina)
+	b.StartTimer()
 	for i := 0; i < b.N; i++ {
 		r.Extend().Email()
 	}
