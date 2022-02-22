@@ -37,19 +37,11 @@ func CheckAndDecompress(githuburl string, obj interface{}) {
 	f, err := os.Open(filename)
 	if err != nil {
 
-		// resp, err := requests.NewSession().Get(githuburl).Execute()
-		// if err != nil {
-		// 	panic(err)
-		// }
+		resp, err := http.DefaultClient.Get(githuburl)
+		if err != nil {
+			panic(err)
+		}
 
-		req, err := http.NewRequest("GET", githuburl, nil)
-		if err != nil {
-			panic(err)
-		}
-		resp, err := http.DefaultClient.Do(req)
-		if err != nil {
-			panic(err)
-		}
 		data, err := ioutil.ReadAll(resp.Body)
 		if err != nil {
 			panic(err)

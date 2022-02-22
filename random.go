@@ -14,6 +14,7 @@ type Random struct {
 	aplha []byte
 }
 
+// New Create Random Object
 func New(seedOrLabel ...interface{}) *Random {
 
 	r := &Random{aplha: alpha}
@@ -103,6 +104,7 @@ func New(seedOrLabel ...interface{}) *Random {
 	}
 }
 
+// New Create Random Object , Not log Seed
 func NewNoLog(seedOrLabel ...interface{}) *Random {
 	r := &Random{aplha: alpha}
 
@@ -211,12 +213,20 @@ func (rand *Random) OneOf32n(N uint32) bool {
 
 // Bytes 随机字节数据 [min,max)
 func (rand *Random) Bytes(min, max int64) []byte {
-	size := rand.Int63n(max-min) + min
+	size := rand.Int63n(max+1-min) + min
 	var buf []byte = make([]byte, size+9)
 	for i := int64(0); i < size; i += 8 {
 		binary.PutUvarint(buf[i:], rand.Uint64())
 	}
 	return buf[0:size]
+}
+
+// Execute random execute func [min, max) times  [min,max)
+func (rand *Random) Execute(min, max int, do func()) {
+	N := rand.Intn(max+1-min) + min
+	for i := 0; i < N; i++ {
+		do()
+	}
 }
 
 func (rand *Random) Extend() *Extend {
