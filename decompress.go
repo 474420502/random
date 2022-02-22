@@ -46,7 +46,6 @@ func CheckAndDecompress(githuburl string, obj interface{}) {
 		if err != nil {
 			panic(err)
 		}
-
 		log.Println(len(data))
 
 		f, err = os.OpenFile(filename, os.O_CREATE|os.O_WRONLY, 0664)
@@ -59,7 +58,6 @@ func CheckAndDecompress(githuburl string, obj interface{}) {
 		}
 
 		w := bufio.NewWriter(f)
-
 		_, err = w.Write(data)
 		if err != nil {
 			panic(err)
