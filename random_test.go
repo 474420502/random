@@ -1,15 +1,8 @@
 package random
 
 import (
-	"encoding/gob"
-	"io/ioutil"
 	"log"
-	"os"
-	"strconv"
-	"strings"
 	"testing"
-
-	"github.com/klauspost/compress/zstd"
 )
 
 func TestIP(t *testing.T) {
@@ -31,96 +24,96 @@ func TestGetData(t *testing.T) {
 
 func estOpenTxt(t *testing.T) {
 
-	var hostsuffix []string = []string{
-		"com",
-		"xyz",
-		"com",
-		"net",
-		"com",
-		"top",
-		"com",
-		"tech",
-		"com",
-		"org",
-		"com",
-		"gov",
-		"com",
-		"edu",
-		"com",
-		"ink",
-		"com",
-		"int",
-		"com",
-		"mil",
-		"com",
-		"pub",
-		"com",
-		"cn",
-		"com",
-		"com.cn",
-		"com",
-		"net.cn",
-		"com",
-		"gov.cn",
-		"com",
-		"org.cn",
-	}
+	// var hostsuffix []string = []string{
+	// 	"com",
+	// 	"xyz",
+	// 	"com",
+	// 	"net",
+	// 	"com",
+	// 	"top",
+	// 	"com",
+	// 	"tech",
+	// 	"com",
+	// 	"org",
+	// 	"com",
+	// 	"gov",
+	// 	"com",
+	// 	"edu",
+	// 	"com",
+	// 	"ink",
+	// 	"com",
+	// 	"int",
+	// 	"com",
+	// 	"mil",
+	// 	"com",
+	// 	"pub",
+	// 	"com",
+	// 	"cn",
+	// 	"com",
+	// 	"com.cn",
+	// 	"com",
+	// 	"net.cn",
+	// 	"com",
+	// 	"gov.cn",
+	// 	"com",
+	// 	"org.cn",
+	// }
 
-	rand := New()
+	// rand := New()
 
-	f, _ := os.Open("word.txt")
-	data, _ := ioutil.ReadAll(f)
-	allwords := string(data)
+	// f, _ := os.Open("word.txt")
+	// data, _ := ioutil.ReadAll(f)
+	// allwords := string(data)
 
-	var wordsmap map[string]bool = make(map[string]bool)
-	for _, s := range strings.Split(allwords, " ") {
+	// var wordsmap map[string]bool = make(map[string]bool)
+	// for _, s := range strings.Split(allwords, " ") {
 
-		s = strings.ToLower(s)
+	// 	s = strings.ToLower(s)
 
-		if len(s) < 3 {
-			continue
-		}
+	// 	if len(s) < 3 {
+	// 		continue
+	// 	}
 
-		if len(s) > 8 {
-			continue
-		}
+	// 	if len(s) > 8 {
+	// 		continue
+	// 	}
 
-		if rand.OneOf64n(3) {
-			num := rand.Intn(10000) + 100
-			ns := strconv.Itoa(num)
-			wordsmap[ns] = true
-		}
+	// 	if rand.OneOf64n(3) {
+	// 		num := rand.Intn(10000) + 100
+	// 		ns := strconv.Itoa(num)
+	// 		wordsmap[ns] = true
+	// 	}
 
-		wordsmap[s] = true
-	}
+	// 	wordsmap[s] = true
+	// }
 
-	var suffixwords [][]byte
-	for k := range wordsmap {
-		suffixwords = append(suffixwords, []byte("@"+k+"."+hostsuffix[rand.Intn(len(hostsuffix))]))
-	}
+	// var suffixwords [][]byte
+	// for k := range wordsmap {
+	// 	suffixwords = append(suffixwords, []byte("@"+k+"."+hostsuffix[rand.Intn(len(hostsuffix))]))
+	// }
 
-	f, err := os.OpenFile("emailsuffix.gob.zst", os.O_CREATE|os.O_RDWR|os.O_TRUNC, 0664)
-	if err != nil {
-		panic(err)
-	}
+	// f, err := os.OpenFile("emailsuffix.gob.zst", os.O_CREATE|os.O_RDWR|os.O_TRUNC, 0664)
+	// if err != nil {
+	// 	panic(err)
+	// }
 
-	enc, err := zstd.NewWriter(f)
-	if err != nil {
-		panic(err)
-	}
+	// enc, err := zstd.NewWriter(f)
+	// if err != nil {
+	// 	panic(err)
+	// }
 
-	genc := gob.NewEncoder(enc)
-	if err != nil {
-		panic(err)
-	}
+	// genc := gob.NewEncoder(enc)
+	// if err != nil {
+	// 	panic(err)
+	// }
 
-	err = genc.Encode(suffixwords)
-	if err != nil {
-		panic(err)
-	}
+	// err = genc.Encode(suffixwords)
+	// if err != nil {
+	// 	panic(err)
+	// }
 
-	enc.Close()
-	f.Close()
+	// enc.Close()
+	// f.Close()
 
 }
 
